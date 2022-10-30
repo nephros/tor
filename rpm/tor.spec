@@ -124,6 +124,12 @@ Icon: %{url}/static/images/tor-logo.svg
 make %{?_smp_mflags}
 
 # >> build post
+
+## UI:
+pushd %{_builddir}/%{name}-%{version}
+%qmake5
+%qmake5_install
+popd
 # << build post
 
 %install
