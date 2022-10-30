@@ -166,7 +166,7 @@ install -D -m644 %SOURCE2 %{buildroot}/%{custom_vardir}/lib/%{name}/torrc
 %dir %{custom_vardir}/lib/%{name}
 %config(noreplace) %{custom_vardir}/lib/%{name}/torrc
 %dir %{_sysconfdir}/%{name}
-%exclude %{_sysconfdir}/%{name}*
+%exclude %{_sysconfdir}/%{name}/*
 %{_datadir}/%{name}/*
 %{_unitdir}/%{name}.service
 # >> files
@@ -174,8 +174,8 @@ install -D -m644 %SOURCE2 %{buildroot}/%{custom_vardir}/lib/%{name}/torrc
 
 %files ui
 %defattr(-,root,root,-)
-%{_datadir}/jolla-settings/entries/i2pd.json
-%{_datadir}/jolla-settings/pages/i2p/*
+%{_datadir}/jolla-settings/entries/tor.json
+%{_datadir}/jolla-settings/pages/tor/*
 %{_datadir}/themes/*/meegotouch/*/icons/*
 %{_datadir}/icons/hicolor/scalable/apps/*.svg
 # >> files ui
