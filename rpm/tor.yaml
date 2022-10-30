@@ -1,0 +1,151 @@
+Name: tor
+Summary: Anonymizing overlay network for TCP
+Version: 0.4.7.10
+Release: 0
+Group: Applications/Internet
+License: GPLv2 and BSD
+SCM: https://git.torproject.org/tor.git
+URL: https://www.torproject.org
+Sources:
+    - '%{name}-%{version}.tar.gz'
+    - '%{name}.service'
+    - 'torrc.minimal'
+Description: |
+    Tor (or The Onion Router) is a free software for enabling online anonymity. Tor
+    directs Internet traffic through a free, worldwide, volunteer network
+    consisting of more than four thousand relays to conceal a user's location or
+    usage from anyone conducting network surveillance or traffic analysis.
+
+    Notices for SailfishOS:
+      the config lives in `/home/.system/var/lib/tor`, not `/etc`
+
+    %if "%{?vendor}" == "chum"
+    PackageName: Tor
+    Type: console-application
+    PackagerName: nephros
+    Categories:
+     - Network
+     - P2P
+    Custom:
+      Repo: %{url}
+      PackagingRepo: https://github.com/nephros/tor
+    Icon: %{url}/static/images/tor-logo.svg
+    Url:
+      Homepage: %{url}
+      Donations:
+        - https://donate.torproject.org/
+    %endif
+
+SetupOptions: -q -n %{name}-%{version}/upstream
+Macros:
+  - 'custom_vardir;/home/.system/%{_var}'
+RpmLintIgnore:
+  - 'summary-too-long'
+  - 'no-changelogname-tag'
+  - 'invalid-url'
+  - 'desktopfile-without-binary'
+  - 'explicit-lib-dependency'
+#Macros:
+#  - 'foo;bar'
+#  - |
+#    spectacle_bug; hack_fix
+#    # Spectacular spectacle hack:
+#    #   abuse Macros to work around the Macro-deleting bug in 0.32
+#    #   also, add a conditional dep:
+#    %if 0%{?sailfishos_version} >= 30400
+#    BuildRequires: some-package
+#    %endif
+#Patches:
+#  - 'baz'
+Requires:
+  - systemd
+RequiresPost:
+  - systemd
+RequiresPostUn:
+  - systemd
+PkgBR:
+  # for the UI:
+  - qt5-qmake
+  - sailfish-svg2png
+PkgConfigBR:
+  - libevent
+  # liblzma
+  - libssl
+  - systemd
+  - zlib
+  - libzstd
+Configure: reconfigure
+ConfigOptions:
+  - '--disable-all-bugs-are-fatal'
+  - '--disable-android'
+  - '--disable-asciidoc'
+  - '--disable-manpage'
+  - '--disable-html-manual'
+  - '--disable-libfuzzer'
+  - '--disable-missing-doc-warnings'
+  - '--disable-module-dirauth'
+  - '--disable-module-relay'
+  - '--disable-restart-debugging'
+  - '--disable-zstd-advanced-apis'
+  - '--disable-gcc-warnings-advisory'
+  - '--enable-pic'
+  - '--enable-systemd'
+  - '--disable-lzma'
+  - '--enable-zstd'
+  - '--disable-system-torrc'
+  - '--localstatedir=%{custom_vardir}'
+
+#Builder: make
+NoIconCache: true
+#BuildArch: noarch
+#AutoSubPackages:
+#  - doc
+Files:
+  - '%license LICENSE'
+  - '%{_bindir}/*'
+  - '%dir %{custom_vardir}/%{name}'
+  - '%config(noreplace) %{custom_vardir}/%{name}/torrc'
+  - '%dir %{_sysconfdir}/%{name}'
+  - '%exclude %{_sysconfdir}/%{name}*'
+  - '%{_datadir}/%{name}/*'
+  - '%{_unitdir}/%{name}.service'
+
+SubPackages:
+    - Name:  ui
+      Summary: UI components for %{name}
+      Group: Applications/Internet
+      License: ASL 2.0 and Public Domain
+      BuildArch: noarch
+      NoIconCache: true
+      AutoDepend: no
+      Requires:
+        - '%{name}'
+        - 'jolla-settings'
+      Description: |
+          Settings UI integration for Tor.
+
+          Adds a Settings entry and a TopMenu switch to start/stop the demon
+          and show some state information.
+          Installing this will install the daemon as well.
+
+          Tor (or The Onion Router) is a free software for enabling online anonymity. Tor
+          directs Internet traffic through a free, worldwide, volunteer network
+          consisting of more than four thousand relays to conceal a user's location or
+          usage from anyone conducting network surveillance or traffic analysis.
+
+          %if "%{?vendor}" == "chum"
+          PackageName: Tor Settings UI
+          Type: desktop-application
+          PackagerName: nephros
+          Categories:
+           - Network
+           - P2P
+          Custom:
+            Repo: https://github.com/nephros/tor
+          Icon: %{url}/static/images/tor-logo.svg
+          %endif
+      Files:
+        - '%{_datadir}/jolla-settings/entries/i2pd.json'
+        - '%{_datadir}/jolla-settings/pages/i2p/*'
+        - '%{_datadir}/themes/*/meegotouch/*/icons/*'
+        - '%{_datadir}/icons/hicolor/scalable/apps/*.svg'
