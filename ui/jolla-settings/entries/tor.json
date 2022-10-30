@@ -1,0 +1,29 @@
+{
+    "translation_catalog": "settings-networking",
+    "entries": [
+        {
+            "path": "system_settings/connectivity/tor",
+            "type": "page",
+            "title": "Tor",
+            "translation_id": "settings_networking-tor",
+            "order": 352,
+            "icon": "image://theme/icon-m-tor",
+            "params": {
+                "source": "/usr/share/jolla-settings/pages/tor/mainpage.qml",
+                "privileged": "true"
+            }
+        },
+        {
+            "path": "system_settings/connectivity/tor/enable_switch",
+            "type": "custom",
+            "icon": "image://theme/icon-m-tor",
+            "title": "Tor",
+            "params": {
+                "source": "/usr/share/jolla-settings/pages/tor/EnableSwitch.qml",
+                "type": "grid",
+                "privileged": "true",
+                "settings_path": "system_settings/connectivity/tor"
+            }
+        }
+    ]
+}
