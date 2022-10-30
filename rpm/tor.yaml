@@ -103,8 +103,8 @@ NoIconCache: true
 Files:
   - '%license LICENSE'
   - '%{_bindir}/*'
-  - '%dir %{custom_vardir}/%{name}'
-  - '%config(noreplace) %{custom_vardir}/%{name}/torrc'
+  - '%dir %{custom_vardir}/lib/%{name}'
+  - '%config(noreplace) %{custom_vardir}/lib/%{name}/torrc'
   - '%dir %{_sysconfdir}/%{name}'
   - '%exclude %{_sysconfdir}/%{name}*'
   - '%{_datadir}/%{name}/*'

@@ -140,7 +140,7 @@ rm -rf %{buildroot}
 
 # >> install post
 install -D -m644 %SOURCE1 %{buildroot}/%{_unitdir}/%{name}.service
-install -D -m644 %SOURCE2 %{buildroot}/%{custom_vardir}/%{name}/torrc
+install -D -m644 %SOURCE2 %{buildroot}/%{custom_vardir}/lib/%{name}/torrc
 # << install post
 
 %preun
@@ -162,8 +162,8 @@ install -D -m644 %SOURCE2 %{buildroot}/%{custom_vardir}/%{name}/torrc
 %defattr(-,root,root,-)
 %license LICENSE
 %{_bindir}/*
-%dir %{custom_vardir}/%{name}
-%config(noreplace) %{custom_vardir}/%{name}/torrc
+%dir %{custom_vardir}/lib/%{name}
+%config(noreplace) %{custom_vardir}/lib/%{name}/torrc
 %dir %{_sysconfdir}/%{name}
 %exclude %{_sysconfdir}/%{name}*
 %{_datadir}/%{name}/*
