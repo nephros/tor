@@ -108,6 +108,7 @@ Icon: %{url}/static/images/tor-logo.svg
     --disable-manpage \
     --disable-html-manual \
     --disable-libfuzzer \
+    --disable-unittests \
     --disable-missing-doc-warnings \
     --disable-module-dirauth \
     --disable-module-relay \
