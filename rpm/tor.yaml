@@ -146,7 +146,8 @@ SubPackages:
           Icon: %{url}/static/images/tor-logo.svg
           %endif
       Files:
-        - '%{_datadir}/jolla-settings/entries/tor.json'
-        - '%{_datadir}/jolla-settings/pages/tor/*'
+        - '%{_datadir}/jolla-settings/entries/%{name}.json'
+        - '%dir %{_datadir}/jolla-settings/pages/%{name}'
+        - '%{_datadir}/jolla-settings/pages/%{name}/*'
         - '%{_datadir}/themes/*/meegotouch/*/icons/*'
         - '%{_datadir}/icons/hicolor/scalable/apps/*.svg'

@@ -125,11 +125,9 @@ Icon: %{url}/static/images/tor-logo.svg
 make %{?_smp_mflags}
 
 # >> build post
-
 ## UI:
 pushd %{_builddir}/%{name}-%{version}
 %qmake5
-%qmake5_install
 popd
 # << build post
 
@@ -142,6 +140,10 @@ rm -rf %{buildroot}
 # >> install post
 install -D -m644 %SOURCE1 %{buildroot}/%{_unitdir}/%{name}.service
 install -D -m644 %SOURCE2 %{buildroot}/%{custom_vardir}/lib/%{name}/torrc
+## UI:
+pushd %{_builddir}/%{name}-%{version}
+%qmake5_install
+popd
 # << install post
 
 %preun
@@ -174,8 +176,9 @@ install -D -m644 %SOURCE2 %{buildroot}/%{custom_vardir}/lib/%{name}/torrc
 
 %files ui
 %defattr(-,root,root,-)
-%{_datadir}/jolla-settings/entries/tor.json
-%{_datadir}/jolla-settings/pages/tor/*
+%{_datadir}/jolla-settings/entries/%{name}.json
+%dir %{_datadir}/jolla-settings/pages/%{name}
+%{_datadir}/jolla-settings/pages/%{name}/*
 %{_datadir}/themes/*/meegotouch/*/icons/*
 %{_datadir}/icons/hicolor/scalable/apps/*.svg
 # >> files ui
