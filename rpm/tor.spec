@@ -10,7 +10,7 @@ Name:       tor
 %define custom_vardir /home/.system/%{_var}
 
 Summary:    Anonymizing overlay network for TCP
-Version:    0.4.7.10
+Version:    0.4.8.9
 Release:    0
 Group:      Applications/Internet
 License:    GPLv2 and BSD
@@ -41,20 +41,19 @@ Notices for SailfishOS:
   the config lives in `/home/.system/var/lib/tor`, not `/etc`
 
 %if "%{?vendor}" == "chum"
-PackageName: Tor
+Title: Tor
 Type: console-application
-PackagerName: nephros
+PackagedBy: nephros
 Categories:
  - Network
  - P2P
 Custom:
   Repo: %{url}
   PackagingRepo: https://github.com/nephros/tor
-Icon: %{url}/static/images/tor-logo.svg
-Url:
+PackageIcon: %{url}/static/images/tor-logo.svg
+Links:
   Homepage: %{url}
-  Donations:
-    - https://donate.torproject.org/
+  Donations: https://donate.torproject.org/
 %endif
 
 
